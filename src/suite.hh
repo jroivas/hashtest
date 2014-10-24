@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <map>
 #include <functional>
 
 class Suite
@@ -7,15 +8,24 @@ class Suite
 public:
     Suite() {}
 
-    inline void addTest(std::function<std::string (std::string)> entry) {
-        m_tests.push_back(entry);
+    inline void addTest(
+        std::string name,
+        std::function<std::string (std::string)> entry)
+    {
+        m_tests[name] = entry;
     }
 
     void run(std::vector<std::string> data);
+    std::map<std::string, unsigned long> collisions();
+    unsigned long collisions(std::string name);
 
     void printResults();
-    std::vector<std::vector<std::string>> m_results;
 
 protected:
-    std::vector<std::function<std::string (std::string)>> m_tests;
+    unsigned int collisionsInDataSet(std::vector<std::string> data);
+    std::map<
+        std::string,
+        std::function<std::string (std::string)>
+    > m_tests;
+    std::map<std::string, std::vector<std::string>> m_results;
 };

@@ -1,11 +1,21 @@
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 #include "testloader.hh"
 #include "suite.hh"
 
 void usage(std::string appname)
 {
     std::cout << "Usage: " << appname << " data_file algorithm [algorithm2]\n";
+}
+
+std::string& trim(std::string& str)
+{
+  str.erase(str.begin(), find_if(str.begin(), str.end(),
+    [](char& ch)->bool { return !isspace(ch); }));
+  str.erase(find_if(str.rbegin(), str.rend(),
+    [](char& ch)->bool { return !isspace(ch); }).base(), str.end());
+  return str;
 }
 
 std::vector<std::string> readData(std::string f)
@@ -15,7 +25,9 @@ std::vector<std::string> readData(std::string f)
     if (datafile.is_open()) {
         std::string line;
         while (getline(datafile, line)) {
-            res.push_back(line);
+            line = trim(line);
+            if (!line.empty())
+                res.push_back(line);
         }
     }
     datafile.close();
@@ -38,7 +50,7 @@ int main(int argc, char **argv)
         if (test != nullptr) {
             std::cout << "Adding " << argv[p] << "\n";
             tests.push_back(test);
-            suite.addTest(test->func());
+            suite.addTest(argv[p], test->func());
         } else {
             std::cerr << "ERROR: Can't load " << argv[p] << "\n";
             return 1;
@@ -46,7 +58,10 @@ int main(int argc, char **argv)
     }
 
     suite.run(data);
-    suite.printResults();
+    for (int p = 2; p < argc; ++p) {
+        std::string item = argv[p];
+        std::cout << suite.collisions(item) << " collisions in " << item << "\n";
+    }
 
     for (auto test : tests) {
         delete test;
