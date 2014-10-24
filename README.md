@@ -29,3 +29,6 @@ Run it inside the build folder
 
 Murmur2 and Murmur3:
 * https://code.google.com/p/smhasher/source/browse/trunk/
+
+DJB2 and DJB2a:
+* http://www.cse.yorku.ca/~oz/hash.html
