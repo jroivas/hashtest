@@ -32,3 +32,6 @@ Murmur2 and Murmur3:
 
 DJB2, DJB2a, SDBM and loselose:
 * http://www.cse.yorku.ca/~oz/hash.html
+
+CRC32
+* http://rosettacode.org/wiki/CRC-32#C
