@@ -35,3 +35,6 @@ DJB2, DJB2a, SDBM and loselose:
 
 CRC32
 * http://rosettacode.org/wiki/CRC-32#C
+
+xxhash
+* https://github.com/Cyan4973/xxHash
