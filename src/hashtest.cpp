@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 
     Suite suite;
     std::vector<Test*> tests;
-    for (int p = 1; p < argc; ++p) {
+    for (int p = 2; p < argc; ++p) {
         Test *test = TestLoader::load(argv[p]);
         if (test != nullptr) {
             std::cout << "Adding " << argv[p] << "\n";
@@ -46,6 +46,7 @@ int main(int argc, char **argv)
     }
 
     suite.run(data);
+    suite.printResults();
 
     for (auto test : tests) {
         delete test;

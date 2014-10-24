@@ -1,4 +1,3 @@
-SET(CMAKE_CXX_FLAGS "-std=c++0x")
 
 add_executable(hashtest
     hashtest.cpp

@@ -13,6 +13,9 @@ public:
 
     void run(std::vector<std::string> data);
 
+    void printResults();
+    std::vector<std::vector<std::string>> m_results;
+
 protected:
     std::vector<std::function<std::string (std::string)>> m_tests;
 };
