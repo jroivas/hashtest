@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "testloader.hh"
 #include "suite.hh"
+#include "../algorithms/algorithm.hh"
 
 void usage(std::string appname)
 {
