@@ -1,5 +1,5 @@
 
-add_library(djb2a SHARED
+add_library(sdbm SHARED
     ../algorithm.hh
-    djb2.cpp)
+    sdbm.cpp)
 include_directories(..)

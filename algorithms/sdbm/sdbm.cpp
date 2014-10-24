@@ -1,20 +1,20 @@
 #include <algorithm.hh>
 
-unsigned long
-hash(const char *str)
+static unsigned long
+sdbm(const char *str)
 {
-    unsigned long hash = 5381;
+    unsigned long hash = 0;
     int c;
 
     while (c = *str++)
-        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+        hash = c + (hash << 6) + (hash << 16) - hash;
 
     return hash;
 }
 
 std::string hashtest(std::string data)
 {
-    unsigned long res = hash(data.c_str());
+    unsigned long res = sdbm(data.c_str());
 
     std::string outp;
     outp.push_back((char)(res & 0xFF));

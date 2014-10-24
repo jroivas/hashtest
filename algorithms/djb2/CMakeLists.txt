@@ -1,4 +1,5 @@
 
 add_library(djb2 SHARED
-    djb2.hh
+    ../algorithm.hh
     djb2.cpp)
+include_directories(..)

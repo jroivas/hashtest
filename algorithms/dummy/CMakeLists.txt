@@ -1,4 +1,6 @@
 
 add_library(dummy SHARED
-    dummy.hh
+    ../algorithm.hh
     dummy.cpp)
+
+include_directories(..)

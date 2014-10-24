@@ -1,4 +1,4 @@
-#include "djb2.hh"
+#include <algorithm.hh>
 
 unsigned long
 hash(const char *str)

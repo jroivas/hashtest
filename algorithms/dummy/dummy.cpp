@@ -1,4 +1,4 @@
-#include "dummy.hh"
+#include <algorithm.hh>
 
 std::string hashtest(std::string data)
 {
