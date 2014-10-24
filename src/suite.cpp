@@ -19,6 +19,11 @@ unsigned int Suite::collisionsInDataSet(std::vector<std::string> data)
 
     std::sort(data.begin(), data.end());
     for (unsigned int i = 0; i < data.size() - 1; ++i) {
+#if 0
+        if (data[i] == data[i+1]) {
+            std::cout << "SAME: " << data[i] << " == " << data[i+1] << "\n";
+        }
+#endif
         coll += (data[i] == data[i+1]);
     }
     return coll;

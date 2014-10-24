@@ -30,5 +30,5 @@ Run it inside the build folder
 Murmur2 and Murmur3:
 * https://code.google.com/p/smhasher/source/browse/trunk/
 
-DJB2, DJB2a and SDBM:
+DJB2, DJB2a, SDBM and loselose:
 * http://www.cse.yorku.ca/~oz/hash.html
