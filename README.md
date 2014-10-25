@@ -44,3 +44,6 @@ FNV and FNV-1a
 
 cityhash:
 * https://code.google.com/p/cityhash/
+
+jenkins OAT:
+* http://en.wikipedia.org/wiki/Jenkins_hash_function

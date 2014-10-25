@@ -19,6 +19,9 @@ public:
     std::map<std::string, unsigned long> collisions();
     unsigned long collisions(std::string name);
     double timing(std::string name);
+    inline std::map<std::string, double> timing() const {
+        return m_timing;
+    }
 
     void printResults();
 

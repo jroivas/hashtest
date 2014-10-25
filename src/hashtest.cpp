@@ -24,6 +24,23 @@ std::vector<std::string> readData(std::string f)
     return res;
 }
 
+template<typename A, typename B>
+std::pair<B, A> flip_pair(const std::pair<A, B> &data)
+{
+    return std::pair<B, A>(data.second, data.first);
+}
+
+template<typename A, typename B>
+std::multimap<B, A> flip_map(const std::map<A, B> &src)
+{
+    std::multimap<B, A> res;
+    std::transform(
+        src.begin(), src.end(),
+        std::inserter(res, res.begin()),
+        flip_pair<A, B>);
+    return res;
+}
+
 int main(int argc, char **argv)
 {
     if (argc < 3) {
@@ -48,12 +65,31 @@ int main(int argc, char **argv)
     }
 
     suite.run(data);
+
+    std::map<std::string, unsigned long> coll = suite.collisions();
+    std::multimap<unsigned long, std::string> coll_rev = flip_map(coll);
+    std::map<std::string, double> timings = suite.timing();
+    std::multimap<double, std::string> timings_rev = flip_map(timings);
+
     for (int p = 2; p < argc; ++p) {
         std::string item = argv[p];
         std::cout << item << ":\n";
-        std::cout << "  " << suite.collisions(item) << " collisions\n";
-        std::cout << "  " << suite.timing(item) << " nanoseconds per item\n";
+
+        std::cout << "  " << coll[item] << " collisions\n";
+        std::cout << "  " << timings[item] << " nanoseconds per item\n";
     }
+
+    std::cout << "From fastest to slowest:";
+    for (auto item : timings_rev) {
+        std::cout << " " << item.second;
+    }
+    std::cout << "\n";
+
+    std::cout << "From best to worst     :";
+    for (auto item : coll_rev) {
+        std::cout << " " << item.second;
+    }
+    std::cout << "\n";
 
     for (auto test : tests) {
         delete test;
