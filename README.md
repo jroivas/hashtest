@@ -41,3 +41,6 @@ xxhash
 
 FNV and FNV-1a
 * http://www.isthe.com/chongo/tech/comp/fnv/index.html#FNV-1
+
+cityhash:
+* https://code.google.com/p/cityhash/
