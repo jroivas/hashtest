@@ -9,15 +9,6 @@ void usage(std::string appname)
     std::cout << "Usage: " << appname << " data_file algorithm [algorithm2]\n";
 }
 
-std::string& trim(std::string& str)
-{
-  str.erase(str.begin(), find_if(str.begin(), str.end(),
-    [](char& ch)->bool { return !isspace(ch); }));
-  str.erase(find_if(str.rbegin(), str.rend(),
-    [](char& ch)->bool { return !isspace(ch); }).base(), str.end());
-  return str;
-}
-
 std::vector<std::string> readData(std::string f)
 {
     std::vector<std::string> res;
@@ -25,7 +16,6 @@ std::vector<std::string> readData(std::string f)
     if (datafile.is_open()) {
         std::string line;
         while (getline(datafile, line)) {
-            line = trim(line);
             if (!line.empty())
                 res.push_back(line);
         }

@@ -38,3 +38,6 @@ CRC32
 
 xxhash
 * https://github.com/Cyan4973/xxHash
+
+FNV and FNV-1a
+* http://www.isthe.com/chongo/tech/comp/fnv/index.html#FNV-1
