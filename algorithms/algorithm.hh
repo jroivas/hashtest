@@ -26,8 +26,8 @@ std::string toString(T* value, unsigned int size)
     char *ptr = (char*)value;
 
     while (c < size) {
-        outp += toHexChar(*ptr & 0xF);
         outp += toHexChar((*ptr >> 4) & 0xF);
+        outp += toHexChar(*ptr & 0xF);
         ++ptr;
         ++c;
     }
