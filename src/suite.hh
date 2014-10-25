@@ -18,6 +18,7 @@ public:
     void run(std::vector<std::string> data);
     std::map<std::string, unsigned long> collisions();
     unsigned long collisions(std::string name);
+    double timing(std::string name);
 
     void printResults();
 
@@ -28,4 +29,5 @@ protected:
         std::function<std::string (std::string)>
     > m_tests;
     std::map<std::string, std::vector<std::string>> m_results;
+    std::map<std::string, double> m_timing;
 };

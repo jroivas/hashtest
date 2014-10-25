@@ -50,7 +50,9 @@ int main(int argc, char **argv)
     suite.run(data);
     for (int p = 2; p < argc; ++p) {
         std::string item = argv[p];
-        std::cout << suite.collisions(item) << " collisions in " << item << "\n";
+        std::cout << item << ":\n";
+        std::cout << "  " << suite.collisions(item) << " collisions\n";
+        std::cout << "  " << suite.timing(item) << " nanoseconds per item\n";
     }
 
     for (auto test : tests) {

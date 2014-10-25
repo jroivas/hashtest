@@ -5,7 +5,7 @@ unsigned long hash(std::string data)
     unsigned long hash = 2166136261UL;
     unsigned long prime = 16777619UL;
     for (auto octet : data)
-        hash = (hash * prime) ^ (unsigned char)octet;
+        hash = (hash * prime) ^ octet;
 
     return hash;
 }

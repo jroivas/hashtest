@@ -1,15 +1,22 @@
 #include "suite.hh"
 #include <iostream>
 #include <algorithm>
+#include <chrono>
 
 void Suite::run(std::vector<std::string> data)
 {
+    unsigned long items = data.size();
     for (auto fn : m_tests) {
         std::vector<std::string> res;
+        auto start = std::chrono::high_resolution_clock::now();
         for (auto line : data) {
             res.push_back(fn.second(line));
         }
+        auto end = std::chrono::high_resolution_clock::now();
         m_results[fn.first] = res;
+        m_timing[fn.first] =
+            std::chrono::duration<double, std::nano>(end - start).count()
+            / items;
     }
 }
 
@@ -45,6 +52,15 @@ unsigned long Suite::collisions(std::string name)
         throw std::string("Invalid result entry: " + name);
 
     return collisionsInDataSet(entry->second);
+}
+
+double Suite::timing(std::string name)
+{
+    auto entry = m_timing.find(name);
+    if (entry == m_timing.end())
+        throw std::string("Invalid result entry: " + name);
+
+    return entry->second;
 }
 
 void Suite::printResults()
