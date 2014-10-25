@@ -41,7 +41,7 @@ def genNumbers(filedesc, count):
 def genUUID(filedesc, count):
     """ Generate UUIDs
 
-    >>> genNumbers(sys.stdout, 0) # doctest: +ELLIPSIS
+    >>> genUUID(sys.stdout, 0) # doctest: +ELLIPSIS
     Traceback (most recent call last):
     ...
     ValueError: Count needs to be 1 or more
@@ -52,10 +52,58 @@ def genUUID(filedesc, count):
     for num in xrange(1, count + 1):
         filedesc.write('%s\n' % str(uuid.uuid4()))
 
+def genLongLines(filedesc, count):
+    """ Generate UUIDs
+
+    >>> genLongLines(sys.stdout, 1) # doctest: +ELLIPSIS
+    a
+    >>> genLongLines(sys.stdout, 2) # doctest: +ELLIPSIS
+    a
+    b
+    >>> genLongLines(sys.stdout, 3) # doctest: +ELLIPSIS
+    a
+    b
+    c
+    >>> genLongLines(sys.stdout, 30) # doctest: +ELLIPSIS
+    a
+    b
+    c
+    ...
+    y
+    aa
+    bb
+    cc
+    dd
+    ee
+    >>> genLongLines(sys.stdout, 100) # doctest: +ELLIPSIS
+    a
+    ...
+    wwww
+    xxxx
+    yyyy
+    >>> genLongLines(sys.stdout, 1020) # doctest: +ELLIPSIS
+    a
+    ...
+    sssssssssssssssssssssssssssssssssssssssss
+    ttttttttttttttttttttttttttttttttttttttttt
+    >>> genLongLines(sys.stdout, 0) # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+    ...
+    ValueError: Count needs to be 1 or more
+    """
+    if count < 1:
+        raise ValueError('Count needs to be 1 or more')
+
+    for num in xrange(1, count + 1):
+        the_range = (ord('z') - ord('a'))
+        line = (1 + (num - 1) / the_range) * chr(ord('a') + (num - 1) % the_range)
+        filedesc.write('%s\n' % line)
+
 def usage():
     print ('Usage: %s tool output_file [number_of_items]' % sys.argv[0])
     print ('Tools:')
     print ('       number')
+    print ('       longlines')
     print ('       uuid')
     print ('\nBy default generates 100000 items')
 
@@ -69,6 +117,8 @@ if __name__ == '__main__':
         gentool = genNumbers
     elif tool == 'uuid':
         gentool = genUUID
+    elif tool == 'longlines':
+        gentool = genLongLines
     else:
         print ('ERROR: Invalid tool: %s\n' % tool)
         usage()
